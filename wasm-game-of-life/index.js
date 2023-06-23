@@ -4,8 +4,8 @@ const initUniverse = (wasm) => {
   const GRID_COLOR = "#CCCCCC";
   const DEAD_COLOR = "#FFFFFF";
   const ALIVE_COLOR = "#000000";
-  const GRID_WIDTH = 450;
-  const GRID_HEIGHT = 450;
+  const GRID_WIDTH = 600;
+  const GRID_HEIGHT = 600;
   const CELL_SIZE = 10; // px
   let rendering = false;
   const universe = Universe.new(GRID_WIDTH, GRID_HEIGHT);
@@ -55,13 +55,32 @@ const initUniverse = (wasm) => {
 
     ctx.beginPath();
 
+    // Alive cells.
+    ctx.fillStyle = ALIVE_COLOR;
     for (let row = 0; row < height; row++) {
       for (let col = 0; col < width; col++) {
         const idx = universe.get_index(row, col);
+        if (cells[idx] !== Cell.Alive) {
+          continue;
+        }
 
-        ctx.fillStyle = cells[idx] === Cell.Dead
-          ? DEAD_COLOR
-          : ALIVE_COLOR;
+        ctx.fillRect(
+          col * (CELL_SIZE + 1) + 1,
+          row * (CELL_SIZE + 1) + 1,
+          CELL_SIZE,
+          CELL_SIZE
+        );
+      }
+    }
+
+    // Dead cells.
+    ctx.fillStyle = DEAD_COLOR;
+    for (let row = 0; row < height; row++) {
+      for (let col = 0; col < width; col++) {
+        const idx = universe.get_index(row, col);
+        if (cells[idx] !== Cell.Dead) {
+          continue;
+        }
 
         ctx.fillRect(
           col * (CELL_SIZE + 1) + 1,
