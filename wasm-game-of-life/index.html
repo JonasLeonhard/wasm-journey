@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Game of Life</title>
+
+  <script type="module" src="./bootstrap.js" defer></script>
+
+  <style>
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    button {
+      width: min-content;
+    }
+
+    canvas {
+      height: min-content;
+      width: min-content;
+      transform-origin: top left;
+    }
+
+    #scroll-container {
+      width: 100vw;
+      height: calc(100vh - 100px);
+      overflow: hidden;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="controls">
+      <p>scroll to zoom in and out</p>
+      <p>drag mouse to draw</p>
+      <button id="render-btn">
+        start
+      </button>
+      <button id="clear-btn">
+        clear
+      </button>
+    </div>
+    <div id="scroll-container">
+      <canvas id="wasm-game-of-life-canvas" />
+    </div>
+  </div>
+</body>
+
+</html>
