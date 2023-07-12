@@ -1,3 +1,3 @@
 build:
 	wasm-pack build --target web
-	serve
+	serve -l 8080
